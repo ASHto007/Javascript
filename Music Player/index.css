@@ -1,0 +1,461 @@
+/* =====================================================
+   RESET
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   THEME VARIABLES
+   ===================================================== */
+
+/* 🌙 DARK MODE — Spotify vibe */
+[data-theme="dark"] {
+  --bg-main: linear-gradient(180deg, #121212, #000000);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --text-main: #ffffff;
+  --text-muted: #b3b3b3;
+  --accent: #1db954;
+  --song-bg: rgba(255, 255, 255, 0.05);
+  --song-hover: rgba(29, 185, 84, 0.2);
+}
+
+/* 🌞 LIGHT MODE — Gaana / Apple vibe */
+[data-theme="light"] {
+  --bg-main: linear-gradient(180deg, #f7fbff, #e3f2fd);
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --accent: #1db954;
+  --song-bg: rgba(29, 185, 84, 0.08);
+  --song-hover: rgba(29, 185, 84, 0.18);
+}
+
+/* =====================================================
+   BODY
+   ===================================================== */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  transition: background 0.4s ease;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 40px;
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* =====================================================
+   THEME TOGGLE (PREMIUM)
+   ===================================================== */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+
+.switch {
+  position: relative;
+  width: 52px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #4b5563;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.switch input:checked + .slider {
+  background: var(--accent);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* =====================================================
+   LAYOUT
+   ===================================================== */
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 26px;
+  padding: 32px;
+}
+
+/* =====================================================
+   CARDS
+   ===================================================== */
+.song-library,
+.playlist-panel {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 22px;
+  backdrop-filter: blur(18px);
+}
+
+/* =====================================================
+   SONG LIST
+   ===================================================== */
+.songs-list {
+  margin-top: 12px;
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  background: var(--song-bg);
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.song-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.song-item p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.song-item:hover {
+  background: var(--song-hover);
+  transform: translateX(6px);
+}
+
+/* Active song */
+.song-item.active {
+  background: linear-gradient(135deg, var(--accent), rgba(29, 185, 84, 0.7));
+  color: white;
+  font-weight: 700;
+}
+/* ================= GENRE FILTER ================= */
+.genre-filter {
+  position: relative;
+  padding: 16px 18px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  transition: all 0.3s ease;
+}
+
+/* DARK THEME BACKGROUND */
+[data-theme="dark"] .genre-filter {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* LIGHT THEME BACKGROUND */
+[data-theme="light"] .genre-filter {
+  background: linear-gradient(
+    135deg,
+    rgba(2, 132, 199, 0.12),
+    rgba(255, 255, 255, 0.9)
+  );
+  box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.18),
+    0 6px 20px rgba(2, 132, 199, 0.2);
+}
+
+/* Label */
+.genre-filter label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Select Dropdown */
+.genre-filter select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  transition: all 0.25s ease;
+}
+
+/* Select background per theme */
+[data-theme="dark"] .genre-filter select {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .genre-filter select {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+}
+
+/* Custom Arrow */
+.genre-filter::after {
+  content: "▾";
+  position: absolute;
+  right: 22px;
+  top: 55%;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Hover Effect */
+.genre-filter:hover {
+  transform: translateY(-2px);
+}
+
+/* Hover Select */
+.genre-filter select:hover {
+  background: var(--song-hover);
+}
+
+/* Focus State */
+.genre-filter select:focus {
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.4);
+}
+
+/* =====================================================
+   PLAYER CARD (HERO SECTION)
+   ===================================================== */
+.player-card {
+  position: relative;
+  text-align: center;
+  padding: 36px 28px;
+  border-radius: 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(29, 185, 84, 0.25),
+    rgba(0, 0, 0, 0.3)
+  );
+  backdrop-filter: blur(20px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Glow */
+.player-card::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at top,
+    rgba(29, 185, 84, 0.7),
+    transparent 70%
+  );
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Album Art */
+.player-card img {
+  width: 260px;
+  height: 260px;
+  border-radius: 22px;
+  object-fit: cover;
+  margin-bottom: 18px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  transition: transform 0.35s ease;
+}
+
+.player-card img:hover {
+  transform: scale(1.06) rotate(1deg);
+}
+
+/* Song title */
+#song-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+/* Artist */
+#song-artist {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+/* ================= DELETE ICON ================= */
+.remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.remove-btn i {
+  font-size: 0.95rem;
+}
+
+/* Hover effect */
+.remove-btn:hover {
+  color: #ef4444; /* red */
+  background: rgba(239, 68, 68, 0.15);
+  transform: scale(1.15);
+}
+
+/* Active click */
+.remove-btn:active {
+  transform: scale(1);
+}
+
+/* =====================================================
+   PLAYER CONTROLS
+   ===================================================== */
+.player-controls {
+  margin-top: 20px;
+}
+
+.player-controls button {
+  background: var(--accent);
+  border: none;
+  color: #ffffff;
+  padding: 16px;
+  margin: 12px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.player-controls button:hover {
+  transform: scale(1.2);
+  box-shadow: 0 12px 30px rgba(29, 185, 84, 0.7);
+}
+
+/* =====================================================
+   PLAYLIST PANEL
+   ===================================================== */
+.playlist-panel h2 {
+  margin-top: 16px;
+}
+
+/* Playlist item */
+.playlist-item,
+.current-playlist .song-item {
+  background: var(--song-bg);
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.playlist-item:hover,
+.current-playlist .song-item:hover {
+  background: var(--song-hover);
+}
+
+/* Active playlist */
+.playlist-item.active {
+  background: linear-gradient(135deg, var(--accent), rgba(29, 185, 84, 0.6));
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(29, 185, 84, 0.6);
+}
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+input,
+select {
+  width: 100%;
+  margin: 6px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+}
+
+/* =====================================================
+   CREATE PLAYLIST BUTTON (CTA)
+   ===================================================== */
+#create-playlist-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), rgba(29, 185, 84, 0.75));
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#create-playlist-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(29, 185, 84, 0.6);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 900px) {
+  .app-container {
+    grid-template-columns: 1fr;
+  }
+
+  .player-card img {
+    width: 220px;
+    height: 220px;
+  }
+}

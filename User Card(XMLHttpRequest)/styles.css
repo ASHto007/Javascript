@@ -1,0 +1,126 @@
+:root {
+  --bg: #0b0b12;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.2);
+  --text: #f5f5f5;
+  --muted: #b5b5c6;
+  --accent: linear-gradient(135deg, #9d7bff, #6ae3ff);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  min-height: 200vh;
+  background: radial-gradient(circle at top, #171721, var(--bg));
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* ---------------- Magnetic Cursor ---------------- */
+.cursor {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  position: fixed;
+  background: rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 999;
+}
+
+/* ---------------- Controls ---------------- */
+.controls {
+  margin-top: 40px;
+}
+.controls button {
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: var(--accent);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------------- Grid ---------------- */
+.card-container {
+  max-width: 1300px;
+  width: 100%;
+  padding: 80px 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* ---------------- Card ---------------- */
+.user-card {
+  position: relative;
+  height: 360px;
+  padding: 26px;
+  border-radius: 22px;
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  text-align: center;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* GPU blur mask */
+.user-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(30px);
+  mask-image: radial-gradient(circle at center, black 45%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------------- Image ---------------- */
+.user-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #111;
+  padding: 10px;
+  margin-top: 20px;
+  will-change: transform;
+}
+
+.user-card h3 {
+  margin-top: 16px;
+}
+
+.email {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+/* ---------------- Button ---------------- */
+.btn {
+  margin-top: 20px;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------------- Noise Overlay ---------------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 10;
+}
