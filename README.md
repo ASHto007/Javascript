@@ -16,12 +16,12 @@ Each project focuses on writing clean, readable code while implementing practica
 - Browser APIs
 
 ## 📂 Project Categories
-- Interactive UI Components
-- JavaScript Games
-- API-Based Applications
-- Animations & Effects
-- Utility Tools
-- Practice Projects
+- Calculator
+- Emoji Guessing Game
+- Music Player
+- Quiz Game 
+- Stock Market Analysis 
+- User Card ( XMLHttpRequest )
 
 ## ⭐ Why This Repo?
 ✔ Built manually without frameworks  
